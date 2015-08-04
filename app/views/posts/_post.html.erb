@@ -1,6 +1,6 @@
 <p>
   <h2><%= link_to post.title, post %></h2>
-  <i class="text-muted small"><%= post.created_at %></i>
+  <i class="text-muted small"><%= post.created_at %></i><small class="pull-right"><%= post.hearts.count %> Heart(s)</small> 
 </p>
 
 <p>
@@ -9,4 +9,10 @@
 	<% else %>	
 	<%= simple_format post.content %>
 	<% end %>
+	<div class="pull-right">
+		<%= form_for(Heart.new) do |f| %>
+	<%= f.hidden_field :post_id, value: post.id %>
+			<%= f.submit "♥", class: "btn btn-danger" %>
+		<% end %>
+	</div>
 </p>
